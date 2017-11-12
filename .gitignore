@@ -3,6 +3,8 @@ elm-stuff
 # elm-repl generated files
 repl-temp-*
 
+style.min.css
+
 elm.js
 
 node_modules
