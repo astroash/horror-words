@@ -2,12 +2,16 @@ module Routes.PageOne exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import Types exposing (..)
 
 
 pageOne : Model -> Html Msg
 pageOne model =
     div [ class "w-60-ns center" ]
-        [ h1 [ class "tc f1" ] [ text "hello" ]
-        , p [ class "f3 w60 mh1 tc" ] [ text "Welcome to Page One" ]
+        [ h1 [ class "tc f1" ] [ text "Find your horror" ]
+        , Html.form [ class "tc", onSubmit SubmitFilmSearch ]
+            [ input [ class "f3 w30 pa1 center tc", onInput Change, value model.userInput, placeholder "I have no imagination" ] []
+            , button [ class "f3 w30 pa1 center tc" ] [ text "search" ]
+            ]
         ]

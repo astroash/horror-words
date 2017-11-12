@@ -4,3 +4,10 @@ elm-stuff
 repl-temp-*
 
 elm.js
+
+node_modules
+
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
