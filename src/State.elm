@@ -1,6 +1,20 @@
-module Update exposing (..)
+module State exposing (..)
 
 import Types exposing (..)
+
+
+-- Model
+
+
+model : Model
+model =
+    { route = HomeRoute
+    , userInput = ""
+    }
+
+
+
+-- Update
 
 
 getPage : String -> Route
@@ -27,3 +41,9 @@ update msg model =
 
         UrlChange location ->
             { model | route = (getPage location.hash) } ! [ Cmd.none ]
+
+        SubmitFilmSearch ->
+            ( model, Cmd.none )
+
+        SubmitSuggestion ->
+            ( model, Cmd.none )

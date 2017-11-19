@@ -25,3 +25,5 @@ type alias Model =
 type Msg
     = Change String
     | UrlChange Navigation.Location
+    | SubmitFilmSearch
+    | SubmitSuggestion
