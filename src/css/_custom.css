@@ -24,10 +24,23 @@ input {
 body {
   background-color: var(--black-80);
   color: white;
-  font-family: var(--sans-serif);
+  font-family: 'Indie Flower';
   margin: 0;
 }
 
 /*.fangs {
   background-image: url('./assets/fangs.png');
 }*/
+.drip {
+  background-image: url(assets/drip-green-gradient.png);
+  background-repeat: repeat-x;
+  background-size: contain;
+  padding-bottom: 15vh;
+}
+
+@media screen and (max-width: 600px) {
+  .drip {
+    padding-bottom: 15vh;
+    background-size: auto 20vh;
+} 
+}
