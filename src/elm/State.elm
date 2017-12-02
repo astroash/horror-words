@@ -1,7 +1,7 @@
 module State exposing (..)
 
 import Types exposing (..)
-import Ports
+import Ports exposing (..)
 
 
 -- Model
@@ -46,5 +46,5 @@ update msg model =
         SubmitFilmSearch ->
             ( model, Cmd.none )
 
-        SubmitSuggestion ->
-            ( model, Cmd.none )
+        SubmitSuggestion string ->
+            ( model, changeSuggestions string )
