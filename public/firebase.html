@@ -2,38 +2,40 @@
 <head>
 
 </head>
-  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-  <script>
-  // Initialize Firebase
-var config = {
-  apiKey: 'AIzaSyAWCSgrV6Dj9ru2EGVc3QG75U9DK_KaMjE',
-  authDomain: 'horror-words.firebaseapp.com',
-  databaseURL: 'https://horror-words.firebaseio.com',
-  projectId: 'horror-words',
-  storageBucket: '',
-  messagingSenderId: '559967381390'
-}
-firebase.initializeApp(config)
 
-var database = firebase.database()
-function writeData() {
-  database.ref('suggestions').set({
-    name: 'me',
-    film: 'little shop of horrors'
-  })
-}
-function readData() {
-  database.ref('suggestions').on('value', function(snapshot) {
-    console.log(snapshot.val())
-  })
-}
-writeData()
-readData()
-</script>
-  <script type="text/javascript" src="ports.js"></script>
-  <body>
+<body>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
     <script>
-    var app = Elm.Ports.Fullscreen()
+    // Initialize Firebase
+    var config = {
+    apiKey: 'AIzaSyAWCSgrV6Dj9ru2EGVc3QG75U9DK_KaMjE',
+    authDomain: 'horror-words.firebaseapp.com',
+    databaseURL: 'https://horror-words.firebaseio.com',
+    projectId: 'horror-words',
+    storageBucket: '',
+    messagingSenderId: '559967381390'
+    }
+    firebase.initializeApp(config)
+    
+    var database = firebase.database()
+    function writeData() {
+    database.ref('suggestions').set({
+      name: 'me',
+      film: 'little shop of horrors'
+    })
+    }
+    function readData() {
+    database.ref('suggestions').on('value', function(snapshot) {
+      console.log(snapshot.val())
+    })
+    }
+    writeData()
+    readData()
+    </script>
+    <!-- <script type="text/javascript" src="ports.js"></script> -->
+    <script type="text/javascript" src="elm.js"></script>
+    <script>
+    var app = Elm.Main.Fullscreen()
 app.ports.changeSuggestions.subscribe(function(suggestions) {
   console.log(suggestions)
 })
