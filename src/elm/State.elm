@@ -36,7 +36,7 @@ getPage hash =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case msg of
+    case Debug.log "update" msg of
         Change newInput ->
             ( { model | userInput = newInput }, Cmd.none )
 
@@ -48,3 +48,6 @@ update msg model =
 
         SubmitSuggestion string ->
             ( model, changeSuggestions string )
+
+        GotSuggestions json ->
+            ( model, Cmd.none )

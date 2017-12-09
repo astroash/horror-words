@@ -8,6 +8,7 @@ import Navigation
 import State exposing (..)
 import View exposing (..)
 import Types exposing (..)
+import Ports exposing (..)
 
 
 main : Program Never Model Msg
@@ -16,5 +17,5 @@ main =
         { init = (\_ -> ( model, Cmd.none ))
         , view = view
         , update = update
-        , subscriptions = (\_ -> Sub.none)
+        , subscriptions = (\_ -> receiveSuggestions GotSuggestions)
         }

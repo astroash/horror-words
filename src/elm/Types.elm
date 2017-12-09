@@ -1,6 +1,7 @@
 module Types exposing (..)
 
 import Navigation
+import Json.Encode as Json
 
 
 -- Model
@@ -27,3 +28,4 @@ type Msg
     | UrlChange Navigation.Location
     | SubmitFilmSearch
     | SubmitSuggestion String
+    | GotSuggestions Json.Value

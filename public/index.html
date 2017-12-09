@@ -14,40 +14,50 @@
 </head>
 
 <body>
-    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: 'AIzaSyAWCSgrV6Dj9ru2EGVc3QG75U9DK_KaMjE',
-        authDomain: 'horror-words.firebaseapp.com',
-        databaseURL: 'https://horror-words.firebaseio.com',
-        projectId: 'horror-words',
-        storageBucket: '',
-        messagingSenderId: '559967381390'
-      }
-      firebase.initializeApp(config)
-
-      var database = firebase.database()
-      function writeData() {
-        database.ref('suggestions').set({
-          name: 'me',
-          film: 'little shop of horrors'
-        })
-      }
-      function readData() {
-        database.ref('suggestions').on('value', function (snapshot) {
-          console.log(snapshot.val())
-        })
-      }
-      writeData()
-      readData()
-    </script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
   <script>
-  var app = Elm.Main.fullscreen()
-  app.ports.changeSuggestions.subscribe(function (suggestions) {
-      console.log(suggestions)
-    })
-</script>
+    // Initialize Firebase
+    var config = {
+      apiKey: 'AIzaSyAWCSgrV6Dj9ru2EGVc3QG75U9DK_KaMjE',
+      authDomain: 'horror-words.firebaseapp.com',
+      databaseURL: 'https://horror-words.firebaseio.com',
+      projectId: 'horror-words',
+      storageBucket: '',
+      messagingSenderId: '559967381390'
+    }
+    firebase.initializeApp(config)
+
+    var database = firebase.database()
+    // initialise elm
+    var app = Elm.Main.fullscreen()
+
+    // function writeData() {
+    //   database.ref('suggestions').set([
+    //     {
+    //     name: 'astroash',
+    //     film: 'the thing',
+    //     url: 'unknown'
+
+    //   },
+    //     {
+    //     name: 'me',
+    //     film: 'little shop of horrors',
+    //     url: 'unknown'
+    //   },
+    //   ])
+    // }
+    function readData() {
+      database.ref('suggestions').on('value', function (snapshot) {
+        // console.log(snapshot.val())
+        app.ports.receiveSuggestions.send(snapshot.val())
+      })
+    }
+    writeData()
+    readData()
+      app.ports.changeSuggestions.subscribe(function (suggestions) {
+          console.log(suggestions)
+        })
+  </script>
 </body>
 
 </html>
