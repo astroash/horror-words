@@ -31,28 +31,34 @@
     // initialise elm
     var app = Elm.Main.fullscreen()
 
-    // function writeData() {
-    //   database.ref('suggestions').set([
-    //     {
-    //     name: 'astroash',
-    //     film: 'the thing',
-    //     url: 'unknown'
+    function writeData() {
+      database.ref('suggestions').push(
+        {
+        name: 'astroash',
+        film: 'the thing',
+        url: 'unknown'
 
-    //   },
-    //     {
-    //     name: 'me',
-    //     film: 'little shop of horrors',
-    //     url: 'unknown'
-    //   },
-    //   ])
+      }
+      )
+    }
+    // var stringChecker = function (str){
+    //   if (typeof str !== 'string'){
+
+    //   }
     // }
     function readData() {
       database.ref('suggestions').on('value', function (snapshot) {
-        // console.log(snapshot.val())
-        app.ports.receiveSuggestions.send(snapshot.val())
+        var data = snapshot.val()
+        // console.log('data', Array.isArray(data))
+        var dataKeys = Object.keys(data)
+        var dataArray = dataKeys.reduce(function(acc,ele) {
+          return acc.concat(data[ele])
+        },[])
+        // console.log('dataArray', Array.isArray(dataArray))
+        app.ports.receiveSuggestions.send(dataArray)
       })
     }
-    writeData()
+    // writeData()
     readData()
       app.ports.changeSuggestions.subscribe(function (suggestions) {
           console.log(suggestions)

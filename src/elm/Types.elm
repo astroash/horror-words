@@ -16,6 +16,14 @@ type Route
 type alias Model =
     { route : Route
     , userInput : String
+    , suggestions : Maybe (List Suggestion)
+    }
+
+
+type alias Suggestion =
+    { name : String
+    , film : String
+    , url : String
     }
 
 
