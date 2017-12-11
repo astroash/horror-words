@@ -4,7 +4,6 @@ import Types exposing (..)
 import Ports exposing (..)
 import Json.Decode as Decode
 import Json.Decode.Pipeline as Pipeline
-import Json.Encode as Json
 
 
 -- Model
@@ -40,18 +39,15 @@ getPage hash =
 
 decodeSuggestions : Decode.Decoder (List Suggestion)
 decodeSuggestions =
-    Decode.at [ "suggestions" ] (Decode.list suggestionsDecoder)
+    Decode.list suggestionsDecoder
 
 
 suggestionsDecoder : Decode.Decoder Suggestion
 suggestionsDecoder =
     Pipeline.decode Suggestion
         |> Pipeline.required "film" Decode.string
-        |> Debug.log "pipe1"
         |> Pipeline.required "name" Decode.string
-        |> Debug.log "pipe2"
         |> Pipeline.required "url" Decode.string
-        |> Debug.log "pipe3"
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -74,12 +70,5 @@ update msg model =
                 newSuggestions =
                     Decode.decodeValue decodeSuggestions (Debug.log "json" json)
                         |> Result.toMaybe
-
-                -- newSuggestions =
-                --     case json of
-                --         Ok list ->
-                --             list
-                --         Err list ->
-                --             []
             in
                 ( { model | suggestions = Debug.log "decoder" newSuggestions }, Cmd.none )
