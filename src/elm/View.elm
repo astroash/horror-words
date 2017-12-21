@@ -6,7 +6,7 @@ import Html exposing (..)
 -- My Elm Files
 
 import Types exposing (..)
-import Routes.Home exposing (..)
+import Routes.HomePage exposing (..)
 import Routes.PageOne exposing (..)
 import Routes.PageTwo exposing (..)
 import Routes.Navbar exposing (..)
@@ -18,7 +18,7 @@ view model =
         page =
             case model.route of
                 HomeRoute ->
-                    home model
+                    homePage model
 
                 PageOneRoute ->
                     pageOne model

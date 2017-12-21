@@ -45,8 +45,8 @@ decodeSuggestions =
 suggestionsDecoder : Decode.Decoder Suggestion
 suggestionsDecoder =
     Pipeline.decode Suggestion
-        |> Pipeline.required "film" Decode.string
         |> Pipeline.required "name" Decode.string
+        |> Pipeline.required "film" Decode.string
         |> Pipeline.required "url" Decode.string
 
 

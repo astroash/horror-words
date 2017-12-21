@@ -24,10 +24,20 @@ type alias Suggestion =
     { name : String
     , film : String
     , url : String
+
+    -- , details : Maybe FilmDetails
     }
 
 
 
+-- type alias FilmDetails =
+--     { title : String
+--     , year : String
+--     , runtime : String
+--     , director : String
+--     , plot : String
+--     , poster : String
+--     }
 -- Update
 
 
