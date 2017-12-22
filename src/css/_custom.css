@@ -28,9 +28,7 @@ body {
   margin: 0;
 }
 
-/*.fangs {
-  background-image: url('./assets/fangs.png');
-}*/
+/* navbar */
 .drip {
   background-image: url(assets/drip-green-gradient.png);
   background-repeat: repeat-x;
@@ -42,5 +40,11 @@ body {
   .drip {
     padding-bottom: 15vh;
     background-size: auto 20vh;
-} 
+ } 
+}
+
+/* homepage */
+.li-gradient {
+      /* background: linear-gradient(#ffc71f, #f5f504); */
+      background: linear-gradient(#181b19f2,#091307cc)
 }

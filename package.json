@@ -1,13 +1,16 @@
 {
-  "name": "elm-boiler-plate",
+  "name": "horror-words",
   "version": "1.0.0",
-  "description": "a boiler plate for elm projects",
+  "description": "For fac horror club",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev":
-      "elm-live src/Main.elm --output=public/elm.js --dir=public --open --debug --pushstate",
-    "build": "npm run css-build; elm-make src/Main.elm --output=public/elm.js",
+      "elm-live src/elm/Main.elm --output=public/elm.js --dir=public --open --debug --pushstate",
+    "dev-ports":
+      "elm-live src/elm/Ports.elm --output=public/ports.js --dir=public --open --debug --pushstate",
+    "build":
+      "npm run css-build; elm-make src/elm/Main.elm --output=public/elm.js",
     "css-watch":
       "postcss ./src/css/index.css --output ./public/style.min.css --watch --config ./postcss.config.js",
     "css-build":
@@ -15,17 +18,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/astroash/elm-spa-boiler-plate.git"
+    "url": "https://github.com/astroash/horror-words.git"
   },
-  "author": "John Whiles && Astro Ash",
+  "author": "Astro Ash",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/astroash/elm-spa-boiler-plate/issues"
+    "url": "https://github.com/astroash/horror-words/issues"
   },
-  "homepage": "https://github.com/astroash/elm-spa-boiler-plate#readme",
+  "homepage": "https://github.com/astroash/horror-words#readme",
   "devDependencies": {
-    "elm-live": "^2.7.5",
     "autoprefixer": "^7.1.6",
+    "elm-live": "^2.7.5",
     "postcss-clean": "^1.1.0",
     "postcss-cli": "^4.1.1",
     "postcss-custom-media": "^6.0.0",

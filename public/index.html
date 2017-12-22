@@ -5,18 +5,65 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.min.css" />
 
   <script type="text/javascript" src="elm.js"></script>
-  <link rel="stylesheet" href="/style.min.css" />
 
   <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
   <!-- <link rel='shortcut icon' type='image/x-icon' href='/assets/favicon.ico' /> -->
 </head>
 
 <body>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
   <script>
-  Elm.Main.fullscreen()
-</script>
+    // Initialize Firebase
+    var config = {
+      apiKey: 'AIzaSyAWCSgrV6Dj9ru2EGVc3QG75U9DK_KaMjE',
+      authDomain: 'horror-words.firebaseapp.com',
+      databaseURL: 'https://horror-words.firebaseio.com',
+      projectId: 'horror-words',
+      storageBucket: '',
+      messagingSenderId: '559967381390'
+    }
+    firebase.initializeApp(config)
+
+    var database = firebase.database()
+    // initialise elm
+    var app = Elm.Main.fullscreen()
+
+    function writeData() {
+      database.ref('suggestions').push(
+        {
+        name: 'astroash',
+        film: 'the thing',
+        url: 'unknown'
+
+      }
+      )
+    }
+    // var stringChecker = function (str){
+    //   if (typeof str !== 'string'){
+
+    //   }
+    // }
+    function readData() {
+      database.ref('suggestions').on('value', function (snapshot) {
+        var data = snapshot.val()
+        // console.log('data', Array.isArray(data))
+        var dataKeys = Object.keys(data)
+        var dataArray = dataKeys.reduce(function(acc,ele) {
+          return acc.concat(data[ele])
+        },[])
+        // console.log('dataArray', Array.isArray(dataArray))
+        app.ports.receiveSuggestions.send(dataArray)
+      })
+    }
+    // writeData()
+    readData()
+      app.ports.changeSuggestions.subscribe(function (suggestions) {
+          console.log(suggestions)
+        })
+  </script>
 </body>
 
 </html>
