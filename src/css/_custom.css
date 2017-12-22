@@ -45,5 +45,6 @@ body {
 
 /* homepage */
 .li-gradient {
-      background: linear-gradient(#ffc71f, #f5f504);
+      /* background: linear-gradient(#ffc71f, #f5f504); */
+      background: linear-gradient(#181b19f2,#091307cc)
 }

@@ -8,39 +8,40 @@ import Types exposing (..)
 
 homePage : Model -> Html Msg
 homePage model =
-    div [ class "w-60-ns center" ]
-        [ h1 [ class "tc f1 ma0" ] [ text "⚠️" ]
-        , p [ class "f3 w60 tc ma0" ] [ text "Share your fears" ]
-        , Html.form [ class "tc", onSubmit <| SubmitSuggestion model.userInput ]
-            [ input [ class "f4 w30 ma1 pa1 center tc", onInput Change, value model.userInput, placeholder "the scariest of scares" ] []
-            , button [ class "f4 w30 pa1 center tc" ] [ text "add" ]
-            ]
-        , ul
-            [ class "dib ma0 w-100 pa2" ]
-          <|
-            content
-                model.suggestions
-        ]
+    let
+        changeView =
+            case model.homePageView of
+                FirstView ->
+                    div [] []
 
+                FilmOptionsView ->
+                    ul
+                        [ class "dib ma0 w-100 pa2 flex justify-between" ]
+                    <|
+                        List.map contentItem model.filmSearchOptions
 
-contentItem : Suggestion -> Html Msg
-contentItem suggestion =
-    li [ class "list li-gradient ma4 pa2 br2" ]
-        [ a [ class "flex justify-between items-end", href suggestion.url, target "_blank" ]
-            [ h2 [ class "dib ma0 mt4 ml2" ] [ text suggestion.film ]
-            , p [ class "dib ma0 mr2 self-start" ] [ text suggestion.name ]
-            ]
-        ]
+                FilmDetailsView ->
+                    div [] []
 
-
-content : Maybe (List Suggestion) -> List (Html Msg)
-content list =
-    case list of
-        Just list ->
-            List.map contentItem list
-
-        Nothing ->
-            [ li []
-                [ h2 [] [ text "Error retreving DATA" ]
+                FilmSuggestionsView ->
+                    div [] []
+    in
+        div [ class "w-80-ns w-60-m center" ]
+            [ h1 [ class "tc f1 ma0" ] [ text "⚠️" ]
+            , p [ class "f3 w60 tc ma0" ] [ text "Share your fears" ]
+            , Html.form [ class "tc", onSubmit <| SubmitInitialFilmSearch model.userInput ]
+                [ input [ class "f4 w30 ma1 pa1 center tc", onInput Change, value model.userInput, placeholder "the scariest of scares" ] []
+                , button [ class "f4 w30 pa1 center tc" ] [ text "add" ]
                 ]
+            , changeView
             ]
+
+
+contentItem : FilmOption -> Html Msg
+contentItem filmOption =
+    li [ class "dib list li-gradient ma1 pa2 br2 " ]
+        [ button [ class "w-100 bg-transparent", onClick <| SubmitSelectedFilm <| toString filmOption.filmId ]
+            [ h2 [ class "db ma0 ml2 white" ] [ text filmOption.title ]
+            , img [ class "db ma0 mr2", src <| "http://image.tmdb.org/t/p/w185//" ++ filmOption.posterPath ] [ text filmOption.title ]
+            ]
+        ]
