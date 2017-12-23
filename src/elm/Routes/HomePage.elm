@@ -23,15 +23,19 @@ homePage model =
                 FilmDetailsView ->
                     case model.filmSearchDetail of
                         Just filmDetail ->
-                            div [ class "h-100 flex items-center" ]
-                                [ div [ class "dib w-80" ]
-                                    [ h2 [] [ text filmDetail.title ]
-                                    , p [ class "sans-serif" ] [ text filmDetail.plot ]
-                                    , p [] [ text <| "Director: " ++ filmDetail.director ]
-                                    , p [] [ text <| "Runtime: " ++ toString filmDetail.runtime ]
-                                    ]
-                                , div [ class "w-20" ]
+                            div [ class <| "h-100 flex items-center mt2 " ++ itemBg ]
+                                [ div
+                                    [ class "w-20 ml2" ]
                                     [ img [ src <| "http://image.tmdb.org/t/p/w185//" ++ filmDetail.poster ] []
+                                    ]
+                                , div [ class "dib w-60 ph3" ]
+                                    [ h2 [ class "tc mv2" ] [ text filmDetail.title ]
+                                    , p [ class "sans-serif f6" ] [ text filmDetail.plot ]
+                                    , p [ class "mb1" ] [ text <| "Director: " ++ filmDetail.director ]
+                                    , p [ class "mv0" ] [ text <| "Runtime: " ++ toString filmDetail.runtime ]
+                                    ]
+                                , button [ class "w-20 bg-green mr2 br2" ]
+                                    [ p [ class "f4" ] [ text "Add Film" ]
                                     ]
                                 ]
 
@@ -54,9 +58,14 @@ homePage model =
 
 contentItem : FilmOption -> Html Msg
 contentItem filmOption =
-    li [ class "dib list li-gradient ma1 pa2 br2 " ]
+    li [ class <| "dib list " ++ itemBg ]
         [ button [ class "w-100 bg-transparent", onClick <| SubmitSelectedFilm <| toString filmOption.filmId ]
             [ h2 [ class "db ma0 white" ] [ text filmOption.title ]
             , img [ class "db ma0", src <| "http://image.tmdb.org/t/p/w185//" ++ filmOption.posterPath ] [ text filmOption.title ]
             ]
         ]
+
+
+itemBg : String
+itemBg =
+    "li-gradient ma1 pa2 br2"
