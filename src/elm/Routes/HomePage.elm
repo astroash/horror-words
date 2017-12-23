@@ -21,7 +21,22 @@ homePage model =
                         List.map contentItem model.filmSearchOptions
 
                 FilmDetailsView ->
-                    div [] []
+                    case model.filmSearchDetail of
+                        Just filmDetail ->
+                            div [ class "h-100 flex items-center" ]
+                                [ div [ class "dib w-80" ]
+                                    [ h2 [] [ text filmDetail.title ]
+                                    , p [ class "sans-serif" ] [ text filmDetail.plot ]
+                                    , p [] [ text <| "Director: " ++ filmDetail.director ]
+                                    , p [] [ text <| "Runtime: " ++ toString filmDetail.runtime ]
+                                    ]
+                                , div [ class "w-20" ]
+                                    [ img [ src <| "http://image.tmdb.org/t/p/w185//" ++ filmDetail.poster ] []
+                                    ]
+                                ]
+
+                        Nothing ->
+                            div [] []
 
                 FilmSuggestionsView ->
                     div [] []
@@ -41,7 +56,7 @@ contentItem : FilmOption -> Html Msg
 contentItem filmOption =
     li [ class "dib list li-gradient ma1 pa2 br2 " ]
         [ button [ class "w-100 bg-transparent", onClick <| SubmitSelectedFilm <| toString filmOption.filmId ]
-            [ h2 [ class "db ma0 ml2 white" ] [ text filmOption.title ]
-            , img [ class "db ma0 mr2", src <| "http://image.tmdb.org/t/p/w185//" ++ filmOption.posterPath ] [ text filmOption.title ]
+            [ h2 [ class "db ma0 white" ] [ text filmOption.title ]
+            , img [ class "db ma0", src <| "http://image.tmdb.org/t/p/w185//" ++ filmOption.posterPath ] [ text filmOption.title ]
             ]
         ]
