@@ -34,7 +34,7 @@ homePage model =
                                     , p [ class "mb1" ] [ text <| "Director: " ++ filmDetail.director ]
                                     , p [ class "mv0" ] [ text <| "Runtime: " ++ toString filmDetail.runtime ]
                                     ]
-                                , button [ class "w-20 bg-green mr2 br2" ]
+                                , button [ class "w-20 bg-green mr2 br2", onClick <| SubmitSuggestionToDb filmDetail ]
                                     [ p [ class "f4" ] [ text "Add Film" ]
                                     ]
                                 ]

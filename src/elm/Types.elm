@@ -20,7 +20,7 @@ type alias Model =
     , userInput : String
     , filmSearchOptions : List FilmOption
     , filmSearchDetail : Maybe FilmDetail
-    , suggestions : Maybe (List Suggestion)
+    , suggestions : Maybe (List FilmDetail)
     }
 
 
@@ -72,7 +72,7 @@ type Msg
     | UrlChange Navigation.Location
     | SubmitInitialFilmSearch String
     | SubmitSelectedFilm String
-    | SubmitSuggestionToDb String
+    | SubmitSuggestionToDb FilmDetail
     | GotSuggestions Json.Value
     | ReceiveFilmOptions (Result Http.Error (List FilmOption))
     | ReceiveFilmDetails (Result Http.Error ( String -> FilmDetail, String ))

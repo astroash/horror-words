@@ -31,15 +31,8 @@
     // initialise elm
     var app = Elm.Main.fullscreen()
 
-    function writeData() {
-      database.ref('suggestions').push(
-        {
-        name: 'astroash',
-        film: 'the thing',
-        url: 'unknown'
-
-      }
-      )
+    function writeData(filmDetail) {
+      database.ref('suggestions').push(filmDetail)
     }
     // var stringChecker = function (str){
     //   if (typeof str !== 'string'){
@@ -60,9 +53,10 @@
     }
     // writeData()
     readData()
-      app.ports.changeSuggestions.subscribe(function (suggestions) {
-          console.log(suggestions)
-        })
+    app.ports.sendSuggestions.subscribe(function (suggestion) {
+      console.log(suggestion)
+      writeData(suggestion)
+    })
   </script>
 </body>
 
