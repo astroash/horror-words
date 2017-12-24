@@ -20,7 +20,7 @@ type alias Model =
     , userInput : String
     , filmSearchOptions : List FilmOption
     , filmSearchDetail : Maybe FilmDetail
-    , suggestions : Maybe (List Suggestion)
+    , suggestions : Maybe (List FilmDetail)
     }
 
 

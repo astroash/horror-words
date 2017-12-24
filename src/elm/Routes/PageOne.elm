@@ -24,17 +24,17 @@ pageOne model =
         ]
 
 
-contentItem : Suggestion -> Html Msg
-contentItem suggestion =
+contentItem : FilmDetail -> Html Msg
+contentItem filmDetail =
     li [ class "list li-gradient ma4 pa2 br2" ]
-        [ a [ class "flex justify-between items-end", href suggestion.url, target "_blank" ]
-            [ h2 [ class "dib ma0 mt4 ml2" ] [ text suggestion.film ]
-            , p [ class "dib ma0 mr2 self-start" ] [ text suggestion.name ]
+        [ a [ class "flex justify-between items-end" ]
+            [ h2 [ class "dib ma0 mt4 ml2" ] [ text filmDetail.title ]
+            , p [ class "dib ma0 mr2 self-start" ] [ text filmDetail.director ]
             ]
         ]
 
 
-content : Maybe (List Suggestion) -> List (Html Msg)
+content : Maybe (List FilmDetail) -> List (Html Msg)
 content list =
     case list of
         Just list ->

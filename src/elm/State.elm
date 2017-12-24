@@ -47,17 +47,20 @@ getPage hash =
 -- fb decoding
 
 
-decodeSuggestions : Decode.Decoder (List Suggestion)
+decodeSuggestions : Decode.Decoder (List FilmDetail)
 decodeSuggestions =
     Decode.list suggestionsDecoder
 
 
-suggestionsDecoder : Decode.Decoder Suggestion
+suggestionsDecoder : Decode.Decoder FilmDetail
 suggestionsDecoder =
-    Pipeline.decode Suggestion
-        |> Pipeline.required "name" Decode.string
-        |> Pipeline.required "film" Decode.string
-        |> Pipeline.required "url" Decode.string
+    Pipeline.decode FilmDetail
+        |> Pipeline.required "title" Decode.string
+        |> Pipeline.required "year" Decode.string
+        |> Pipeline.required "runtime" Decode.int
+        |> Pipeline.required "plot" Decode.string
+        |> Pipeline.required "poster" Decode.string
+        |> Pipeline.required "director" Decode.string
 
 
 
