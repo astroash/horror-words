@@ -185,8 +185,8 @@ update msg model =
         SubmitSelectedFilm filmId ->
             ( model, filmSelectedApiCall filmId )
 
-        SubmitSuggestionToDb string ->
-            ( model, changeSuggestions string )
+        SubmitSuggestionToDb filmDetail ->
+            ( model, sendSuggestions filmDetail )
 
         GotSuggestions json ->
             let
