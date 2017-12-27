@@ -9,7 +9,7 @@
 @custom-media --breakpoint-large screen and (min-width: 60em);
 
 :root {
-  --sans-serif: 'Roboto', 'helvetica neue', helvetica, arial;
+  --sans-serif: 'Montserrat', 'helvetica neue', helvetica, arial;
   --serif: georgia, serif;
   --handwriting: Caveat;
   --code: consolas, monaco, monospace;
