@@ -10,7 +10,7 @@
   <script type="text/javascript" src="elm.js"></script>
 
   <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Roboto:300" rel="stylesheet">
-  <!-- <link rel='shortcut icon' type='image/x-icon' href='/assets/favicon.ico' /> -->
+  <link rel='shortcut icon' type='image/x-icon' href='/assets/favicon.ico' />
 </head>
 
 <body>
@@ -34,27 +34,19 @@
     function writeData(filmDetail) {
       database.ref('suggestions').push(filmDetail)
     }
-    // var stringChecker = function (str){
-    //   if (typeof str !== 'string'){
 
-    //   }
-    // }
     function readData() {
       database.ref('suggestions').on('value', function (snapshot) {
         var data = snapshot.val()
-        // console.log('data', Array.isArray(data))
         var dataKeys = Object.keys(data)
         var dataArray = dataKeys.reduce(function(acc,ele) {
-          return acc.concat(data[ele])
+          return acc.concat(Object.assign({}, data[ele]))
         },[])
-        // console.log('dataArray', Array.isArray(dataArray))
         app.ports.receiveSuggestions.send(dataArray)
       })
     }
-    // writeData()
     readData()
     app.ports.sendSuggestions.subscribe(function (suggestion) {
-      console.log(suggestion)
       writeData(suggestion)
     })
   </script>
