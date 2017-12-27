@@ -21,6 +21,7 @@ type alias Model =
     , filmSearchOptions : List FilmOption
     , filmSearchDetail : Maybe FilmDetail
     , suggestions : Maybe (List FilmDetail)
+    , inFocusSuggestion : Int
     }
 
 
@@ -41,7 +42,8 @@ type alias Suggestion =
 
 
 type alias FilmDetail =
-    { title : String
+    { filmId : Int
+    , title : String
     , year : String
     , runtime : Int
     , plot : String
@@ -73,6 +75,7 @@ type Msg
     | SubmitInitialFilmSearch String
     | SubmitSelectedFilm String
     | SubmitSuggestionToDb FilmDetail
+    | UpdateInFocusSuggestion Int
     | GotSuggestions Json.Value
     | ReceiveFilmOptions (Result Http.Error (List FilmOption))
     | ReceiveFilmDetails (Result Http.Error ( String -> FilmDetail, String ))

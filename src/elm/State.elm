@@ -7,6 +7,7 @@ import Json.Decode.Pipeline as Pipeline
 import Http exposing (..)
 import Task
 import Config exposing (..)
+import Navigation
 
 
 -- Model
@@ -20,6 +21,7 @@ model =
     , filmSearchOptions = []
     , filmSearchDetail = Nothing
     , suggestions = Nothing
+    , inFocusSuggestion = 0
     }
 
 
@@ -55,6 +57,7 @@ decodeSuggestions =
 suggestionsDecoder : Decode.Decoder FilmDetail
 suggestionsDecoder =
     Pipeline.decode FilmDetail
+        |> Pipeline.required "filmId" Decode.int
         |> Pipeline.required "title" Decode.string
         |> Pipeline.required "year" Decode.string
         |> Pipeline.required "runtime" Decode.int
@@ -111,6 +114,7 @@ filmOptionsApiCall film =
 filmDetailsDecoder : Decode.Decoder (String -> FilmDetail)
 filmDetailsDecoder =
     Pipeline.decode FilmDetail
+        |> Pipeline.required "id" Decode.int
         |> Pipeline.required "title" Decode.string
         |> Pipeline.required "release_date" Decode.string
         |> Pipeline.required "runtime" Decode.int
@@ -175,7 +179,7 @@ filmSelectedApiCall filmId =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case Debug.log "update" msg of
+    case msg of
         Change newInput ->
             ( { model | userInput = newInput }, Cmd.none )
 
@@ -189,12 +193,12 @@ update msg model =
             ( model, filmSelectedApiCall filmId )
 
         SubmitSuggestionToDb filmDetail ->
-            ( model, sendSuggestions filmDetail )
+            ( { model | inFocusSuggestion = filmDetail.filmId }, Cmd.batch [ sendSuggestions filmDetail, Navigation.newUrl ("#pageone") ] )
 
         GotSuggestions json ->
             let
                 newSuggestions =
-                    Decode.decodeValue decodeSuggestions (Debug.log "json" json)
+                    Decode.decodeValue decodeSuggestions json
                         |> Result.toMaybe
             in
                 ( { model | suggestions = newSuggestions }, Cmd.none )
@@ -233,6 +237,9 @@ update msg model =
                     Debug.log "ERR" err
             in
                 ( model, Cmd.none )
+
+        UpdateInFocusSuggestion int ->
+            ( { model | inFocusSuggestion = int }, Cmd.none )
 
 
 sanitiseDate : String -> Maybe String

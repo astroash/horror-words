@@ -1,4 +1,4 @@
-module Routes.Navbar exposing (..)
+module Components.Navbar exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)

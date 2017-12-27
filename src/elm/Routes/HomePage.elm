@@ -4,6 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Types exposing (..)
+import Components.FilmDescription exposing (filmDescHtml)
 
 
 homePage : Model -> Html Msg
@@ -23,31 +24,17 @@ homePage model =
                 FilmDetailsView ->
                     case model.filmSearchDetail of
                         Just filmDetail ->
-                            div [ class <| "h-100 flex items-center mt2 " ++ itemBg ]
-                                [ div
-                                    [ class "w-20 ml2" ]
-                                    [ img [ src <| "http://image.tmdb.org/t/p/w185//" ++ filmDetail.poster ] []
-                                    ]
-                                , div [ class "dib w-60 ph3" ]
-                                    [ h2 [ class "tc mv2" ] [ text filmDetail.title ]
-                                    , p [ class "sans-serif f6" ] [ text filmDetail.plot ]
-                                    , p [ class "mb1" ] [ text <| "Director: " ++ filmDetail.director ]
-                                    , p [ class "mv0" ] [ text <| "Runtime: " ++ toString filmDetail.runtime ]
-                                    ]
-                                , button [ class "w-20 bg-green mr2 br2", onClick <| SubmitSuggestionToDb filmDetail ]
-                                    [ p [ class "f4" ] [ text "Add Film" ]
-                                    ]
-                                ]
+                            filmDescHtml filmDetail True
 
                         Nothing ->
-                            div [] []
+                            div [ class "db ma0 white" ] [ text "There has been an error" ]
 
                 FilmSuggestionsView ->
                     div [] []
     in
         div [ class "w-80-ns w-60-m center" ]
-            [ h1 [ class "tc f1 ma0" ] [ text "⚠️" ]
-            , p [ class "f3 w60 tc ma0" ] [ text "Share your fears" ]
+            [ h1 [ class "tc f1 ma0 emoji" ] [ text "⚠️" ]
+            , p [ class "f2 w60 tc ma0 mb1" ] [ text "Find your fears" ]
             , Html.form [ class "tc", onInput SubmitInitialFilmSearch ]
                 [ input [ class "f4 w30 ma1 pa1 center tc", onInput Change, value model.userInput, placeholder "the scariest of scares" ] []
                 ]
