@@ -9,7 +9,7 @@ import Types exposing (..)
 import Routes.HomePage exposing (..)
 import Routes.PageOne exposing (..)
 import Routes.PageTwo exposing (..)
-import Routes.Navbar exposing (..)
+import Components.Navbar exposing (..)
 
 
 view : Model -> Html Msg

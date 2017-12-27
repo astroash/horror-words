@@ -49,3 +49,7 @@ body {
       background: linear-gradient(#181b19f2,#091307cc);
       box-shadow: 2px 2px 16px 0px #020202;
 }
+
+.emoji {
+  margin-bottom: -2rem;
+}
