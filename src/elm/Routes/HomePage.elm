@@ -1,10 +1,10 @@
-module Routes.HomePage exposing (..)
+module Routes.HomePage exposing (homePage)
 
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import Types exposing (..)
 import Components.FilmDescription exposing (filmDescHtml)
+import Html exposing (Html, button, div, h1, h2, img, input, li, p, text, ul)
+import Html.Attributes exposing (class, placeholder, src, value)
+import Html.Events exposing (onClick, onInput)
+import Types exposing (FilmOption, HomePageView(..), Model, Msg(..))
 
 
 homePage : Model -> Html Msg
@@ -32,14 +32,14 @@ homePage model =
                 FilmSuggestionsView ->
                     div [] []
     in
-        div [ class "w-80-ns w-60-m center" ]
-            [ h1 [ class "tc f1 ma0 emoji" ] [ text "⚠️" ]
-            , p [ class "f2 w60 tc ma0 mb1" ] [ text "Find your fears" ]
-            , Html.form [ class "tc", onInput SubmitInitialFilmSearch ]
-                [ input [ class "f4 w30 ma1 pa1 center tc", onInput Change, value model.userInput, placeholder "the scariest of scares" ] []
-                ]
-            , changeView
+    div [ class "w-80-ns w-60-m center" ]
+        [ h1 [ class "tc f1 ma0 emoji" ] [ text "⚠️" ]
+        , p [ class "f2 w60 tc ma0 mb1" ] [ text "Find your fears" ]
+        , Html.form [ class "tc", onInput SubmitInitialFilmSearch ]
+            [ input [ class "f4 w30 ma1 pa1 center tc", onInput Change, value model.userInput, placeholder "the scariest of scares" ] []
             ]
+        , changeView
+        ]
 
 
 contentItem : FilmOption -> Html Msg

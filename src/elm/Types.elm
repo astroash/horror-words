@@ -1,8 +1,8 @@
-module Types exposing (..)
+module Types exposing (ApiCrewMember, FilmDetail, FilmOption, HomePageView(..), Model, Msg(..), Route(..))
 
-import Navigation
-import Json.Encode as Json
 import Http
+import Json.Encode as Json
+import Navigation
 
 
 -- Model
@@ -10,8 +10,7 @@ import Http
 
 type Route
     = HomeRoute
-    | PageOneRoute
-    | PageTwoRoute
+    | SuggestionsRoute
 
 
 type alias Model =
@@ -30,15 +29,6 @@ type HomePageView
     | FilmOptionsView
     | FilmDetailsView
     | FilmSuggestionsView
-
-
-type alias Suggestion =
-    { name : String
-    , film : String
-    , url : String
-
-    -- , details : Maybe FilmDetails
-    }
 
 
 type alias FilmDetail =

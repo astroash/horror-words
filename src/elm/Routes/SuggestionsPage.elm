@@ -1,14 +1,14 @@
-module Routes.PageOne exposing (..)
+module Routes.SuggestionsPage exposing (suggestionPage)
 
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import Types exposing (..)
 import Components.FilmDescription exposing (filmDescHtml)
+import Html exposing (Html, a, div, h1, h2, li, p, text, ul)
+import Html.Attributes exposing (class)
+import Html.Events exposing (onMouseEnter)
+import Types exposing (FilmDetail, Model, Msg(..))
 
 
-pageOne : Model -> Html Msg
-pageOne model =
+suggestionPage : Model -> Html Msg
+suggestionPage model =
     div [ class "w-60-ns center" ]
         [ h1 [ class "tc f1 ma0" ] [ text "Friends & Foes Fears" ]
         , ul
@@ -39,14 +39,14 @@ content maybeList inFocusFilm =
                 (\filmDetail acc ->
                     let
                         newHtml =
-                            case (filmDetail.filmId == inFocusFilm) of
+                            case filmDetail.filmId == inFocusFilm of
                                 True ->
                                     filmDescHtml filmDetail False
 
                                 False ->
                                     filmSummary filmDetail
                     in
-                        [ newHtml ] ++ acc
+                    newHtml :: acc
                 )
                 []
                 list

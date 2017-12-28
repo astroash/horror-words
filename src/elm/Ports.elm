@@ -1,7 +1,7 @@
-port module Ports exposing (..)
+port module Ports exposing (receiveSuggestions, sendSuggestions)
 
-import Types exposing (..)
 import Json.Encode as Json
+import Types exposing (FilmDetail)
 
 
 port sendSuggestions : FilmDetail -> Cmd msg

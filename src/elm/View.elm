@@ -1,15 +1,12 @@
-module View exposing (..)
-
-import Html exposing (..)
-
+module View exposing (view)
 
 -- My Elm Files
 
-import Types exposing (..)
-import Routes.HomePage exposing (..)
-import Routes.PageOne exposing (..)
-import Routes.PageTwo exposing (..)
-import Components.Navbar exposing (..)
+import Components.Navbar exposing (navbar)
+import Html exposing (Html, div)
+import Routes.HomePage exposing (homePage)
+import Routes.SuggestionsPage exposing (suggestionPage)
+import Types exposing (Model, Msg, Route(..))
 
 
 view : Model -> Html Msg
@@ -20,13 +17,10 @@ view model =
                 HomeRoute ->
                     homePage model
 
-                PageOneRoute ->
-                    pageOne model
-
-                PageTwoRoute ->
-                    pageTwo model
+                SuggestionsRoute ->
+                    suggestionPage model
     in
-        div []
-            [ navbar model
-            , page
-            ]
+    div []
+        [ navbar
+        , page
+        ]
