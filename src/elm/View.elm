@@ -23,6 +23,6 @@ view model =
                     suggestionPage model
     in
         div []
-            [ navbar model
+            [ navbar
             , page
             ]

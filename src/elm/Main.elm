@@ -14,8 +14,8 @@ import Ports exposing (receiveSuggestions)
 main : Program Never Model Msg
 main =
     Navigation.program UrlChange
-        { init = (\_ -> ( model, Cmd.none ))
+        { init = \_ -> ( model, Cmd.none )
         , view = view
         , update = update
-        , subscriptions = (\_ -> receiveSuggestions GotSuggestions)
+        , subscriptions = \_ -> receiveSuggestions GotSuggestions
         }

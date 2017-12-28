@@ -2,11 +2,11 @@ module Components.Navbar exposing (navbar)
 
 import Html exposing (Html, ul, li, text, a)
 import Html.Attributes exposing (class, href)
-import Types exposing (Model, Msg)
+import Types exposing (Msg)
 
 
-navbar : Model -> Html Msg
-navbar model =
+navbar : Html Msg
+navbar =
     ul [ class "dib ma0 w-100 pa2 drip" ]
         navbarContent
 

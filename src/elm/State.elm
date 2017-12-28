@@ -85,7 +85,7 @@ filmOptionsListDecoder =
 
 filmOptionsResultsDecoder : Decode.Decoder (List FilmOption)
 filmOptionsResultsDecoder =
-    Decode.field "results" (filmOptionsListDecoder)
+    Decode.field "results" filmOptionsListDecoder
 
 
 
@@ -145,7 +145,7 @@ filmDirectorFoldDecoder =
 
 filmDirectorDecoder : Decode.Decoder String
 filmDirectorDecoder =
-    Decode.field "crew" (filmDirectorFoldDecoder)
+    Decode.field "crew" filmDirectorFoldDecoder
 
 
 filmSelectedApiCall : String -> Cmd Msg
@@ -162,9 +162,6 @@ filmSelectedApiCall filmId =
 
         request2 =
             Http.get urlDirector filmDirectorDecoder
-
-        test =
-            "test"
     in
         Task.map2 (,) (Http.toTask request1) (Http.toTask request2)
             |> Task.attempt ReceiveFilmDetails
@@ -181,7 +178,7 @@ update msg model =
             ( { model | userInput = newInput }, Cmd.none )
 
         UrlChange location ->
-            { model | route = (getPage location.hash) } ! [ Cmd.none ]
+            { model | route = getPage location.hash } ! [ Cmd.none ]
 
         SubmitInitialFilmSearch film ->
             ( model, filmOptionsApiCall film )
@@ -190,7 +187,7 @@ update msg model =
             ( model, filmSelectedApiCall filmId )
 
         SubmitSuggestionToDb filmDetail ->
-            ( { model | inFocusSuggestion = filmDetail.filmId }, Cmd.batch [ sendSuggestions filmDetail, Navigation.newUrl ("#pageone") ] )
+            ( { model | inFocusSuggestion = filmDetail.filmId }, Cmd.batch [ sendSuggestions filmDetail, Navigation.newUrl "#pageone" ] )
 
         GotSuggestions json ->
             let
@@ -216,7 +213,7 @@ update msg model =
                     result result2
 
                 sanitisedYear =
-                    case (sanitiseDate mergeDetail.year) of
+                    case sanitiseDate mergeDetail.year of
                         Just year ->
                             year
 

@@ -39,14 +39,14 @@ content maybeList inFocusFilm =
                 (\filmDetail acc ->
                     let
                         newHtml =
-                            case (filmDetail.filmId == inFocusFilm) of
+                            case filmDetail.filmId == inFocusFilm of
                                 True ->
                                     filmDescHtml filmDetail False
 
                                 False ->
                                     filmSummary filmDetail
                     in
-                        [ newHtml ] ++ acc
+                        newHtml :: acc
                 )
                 []
                 list
