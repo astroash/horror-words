@@ -1,14 +1,12 @@
 module Main exposing (main)
 
-import Navigation
-
-
 -- My Elm Files
 
-import State exposing (model, update)
-import View exposing (view)
-import Types exposing (Model, Msg(..))
+import Navigation
 import Ports exposing (receiveSuggestions)
+import State exposing (model, update)
+import Types exposing (Model, Msg(..))
+import View exposing (view)
 
 
 main : Program Never Model Msg

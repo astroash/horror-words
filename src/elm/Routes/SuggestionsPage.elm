@@ -1,10 +1,10 @@
 module Routes.SuggestionsPage exposing (suggestionPage)
 
-import Html exposing (Html, div, h1, h2, p, a, ul, li, text)
+import Components.FilmDescription exposing (filmDescHtml)
+import Html exposing (Html, a, div, h1, h2, li, p, text, ul)
 import Html.Attributes exposing (class)
 import Html.Events exposing (onMouseEnter)
-import Types exposing (Model, Msg(..), FilmDetail)
-import Components.FilmDescription exposing (filmDescHtml)
+import Types exposing (FilmDetail, Model, Msg(..))
 
 
 suggestionPage : Model -> Html Msg
@@ -46,7 +46,7 @@ content maybeList inFocusFilm =
                                 False ->
                                     filmSummary filmDetail
                     in
-                        newHtml :: acc
+                    newHtml :: acc
                 )
                 []
                 list

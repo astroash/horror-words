@@ -1,6 +1,6 @@
 module Components.Navbar exposing (navbar)
 
-import Html exposing (Html, ul, li, text, a)
+import Html exposing (Html, a, li, text, ul)
 import Html.Attributes exposing (class, href)
 import Types exposing (Msg)
 

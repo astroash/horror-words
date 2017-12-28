@@ -1,13 +1,13 @@
 module State exposing (model, update)
 
-import Types exposing (Model, Msg(..), Route(..), HomePageView(..), ApiCrewMember, FilmDetail, FilmOption)
-import Ports exposing (sendSuggestions)
+import Config exposing (secret)
+import Http
 import Json.Decode as Decode
 import Json.Decode.Pipeline as Pipeline
-import Http
-import Task
-import Config exposing (apiKey)
 import Navigation
+import Ports exposing (sendSuggestions)
+import Task
+import Types exposing (ApiCrewMember, FilmDetail, FilmOption, HomePageView(..), Model, Msg(..), Route(..))
 
 
 -- Model
@@ -96,12 +96,12 @@ filmOptionsApiCall : String -> Cmd Msg
 filmOptionsApiCall film =
     let
         url =
-            "https://api.themoviedb.org/3/search/movie?api_key=" ++ apiKey ++ "&query=" ++ film ++ "&page=1&include_adult=false"
+            "https://api.themoviedb.org/3/search/movie?api_key=" ++ secret ++ "&query=" ++ film ++ "&page=1&include_adult=false"
 
         request =
             Http.get url filmOptionsResultsDecoder
     in
-        Http.send ReceiveFilmOptions request
+    Http.send ReceiveFilmOptions request
 
 
 
@@ -152,10 +152,10 @@ filmSelectedApiCall : String -> Cmd Msg
 filmSelectedApiCall filmId =
     let
         urlDeets =
-            "https://api.themoviedb.org/3/movie/" ++ filmId ++ "?api_key=" ++ apiKey
+            "https://api.themoviedb.org/3/movie/" ++ filmId ++ "?api_key=" ++ secret
 
         urlDirector =
-            "https://api.themoviedb.org/3/movie/" ++ filmId ++ "/credits?api_key=" ++ apiKey
+            "https://api.themoviedb.org/3/movie/" ++ filmId ++ "/credits?api_key=" ++ secret
 
         request1 =
             Http.get urlDeets filmDetailsDecoder
@@ -163,8 +163,8 @@ filmSelectedApiCall filmId =
         request2 =
             Http.get urlDirector filmDirectorDecoder
     in
-        Task.map2 (,) (Http.toTask request1) (Http.toTask request2)
-            |> Task.attempt ReceiveFilmDetails
+    Task.map2 (,) (Http.toTask request1) (Http.toTask request2)
+        |> Task.attempt ReceiveFilmDetails
 
 
 
@@ -195,7 +195,7 @@ update msg model =
                     Decode.decodeValue decodeSuggestions json
                         |> Result.toMaybe
             in
-                ( { model | suggestions = newSuggestions }, Cmd.none )
+            ( { model | suggestions = newSuggestions }, Cmd.none )
 
         ReceiveFilmOptions (Ok data) ->
             ( { model | filmSearchOptions = data, homePageView = FilmOptionsView }, Cmd.none )
@@ -205,7 +205,7 @@ update msg model =
                 log =
                     Debug.log "ERR" err
             in
-                ( model, Cmd.none )
+            ( model, Cmd.none )
 
         ReceiveFilmDetails (Ok ( result, result2 )) ->
             let
@@ -223,14 +223,14 @@ update msg model =
                 filmDetail =
                     { mergeDetail | year = sanitisedYear }
             in
-                ( { model | filmSearchDetail = Just filmDetail, homePageView = FilmDetailsView }, Cmd.none )
+            ( { model | filmSearchDetail = Just filmDetail, homePageView = FilmDetailsView }, Cmd.none )
 
         ReceiveFilmDetails (Err err) ->
             let
                 log =
                     Debug.log "ERR" err
             in
-                ( model, Cmd.none )
+            ( model, Cmd.none )
 
         UpdateInFocusSuggestion int ->
             ( { model | inFocusSuggestion = int }, Cmd.none )

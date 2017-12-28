@@ -1,8 +1,8 @@
-module Types exposing (Route(..), Model, HomePageView(..), FilmDetail, FilmOption, ApiCrewMember, Msg(..))
+module Types exposing (ApiCrewMember, FilmDetail, FilmOption, HomePageView(..), Model, Msg(..), Route(..))
 
-import Navigation
-import Json.Encode as Json
 import Http
+import Json.Encode as Json
+import Navigation
 
 
 -- Model
