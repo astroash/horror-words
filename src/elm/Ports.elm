@@ -1,6 +1,6 @@
-port module Ports exposing (..)
+port module Ports exposing (sendSuggestions, receiveSuggestions)
 
-import Types exposing (..)
+import Types exposing (FilmDetail)
 import Json.Encode as Json
 
 

@@ -1,8 +1,8 @@
-module Components.Navbar exposing (..)
+module Components.Navbar exposing (navbar)
 
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Types exposing (..)
+import Html exposing (Html, ul, li, text, a)
+import Html.Attributes exposing (class, href)
+import Types exposing (Model, Msg)
 
 
 navbar : Model -> Html Msg
@@ -18,4 +18,4 @@ navbarLink ( linkStr, name ) =
 
 navbarContent : List (Html Msg)
 navbarContent =
-    List.map navbarLink [ ( "home", "I wanna watch..." ), ( "pageone", "Suggestions" ) ]
+    List.map navbarLink [ ( "home", "I wanna watch..." ), ( "suggestions", "Suggestions" ) ]

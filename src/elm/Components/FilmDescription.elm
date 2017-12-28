@@ -1,9 +1,9 @@
-module Components.FilmDescription exposing (..)
+module Components.FilmDescription exposing (filmDescHtml)
 
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import Types exposing (..)
+import Html exposing (Html, div, button, img, p, h2, text)
+import Html.Attributes exposing (class, src, classList)
+import Html.Events exposing (onClick)
+import Types exposing (FilmDetail, Msg(..))
 
 
 filmDescHtml : FilmDetail -> Bool -> Html Msg

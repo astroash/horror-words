@@ -1,9 +1,9 @@
-module Routes.HomePage exposing (..)
+module Routes.HomePage exposing (homePage)
 
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import Types exposing (..)
+import Html exposing (Html, div, h1, h2, p, button, input, ul, li, img, text)
+import Html.Attributes exposing (class, src, placeholder, value)
+import Html.Events exposing (onInput, onClick)
+import Types exposing (Model, Msg(..), FilmOption, HomePageView(..))
 import Components.FilmDescription exposing (filmDescHtml)
 
 

@@ -1,14 +1,14 @@
-module Routes.PageOne exposing (..)
+module Routes.SuggestionsPage exposing (suggestionPage)
 
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import Types exposing (..)
+import Html exposing (Html, div, h1, h2, p, a, ul, li, text)
+import Html.Attributes exposing (class)
+import Html.Events exposing (onMouseEnter)
+import Types exposing (Model, Msg(..), FilmDetail)
 import Components.FilmDescription exposing (filmDescHtml)
 
 
-pageOne : Model -> Html Msg
-pageOne model =
+suggestionPage : Model -> Html Msg
+suggestionPage model =
     div [ class "w-60-ns center" ]
         [ h1 [ class "tc f1 ma0" ] [ text "Friends & Foes Fears" ]
         , ul

@@ -1,12 +1,12 @@
-module State exposing (..)
+module State exposing (model, update)
 
-import Types exposing (..)
-import Ports exposing (..)
+import Types exposing (Model, Msg(..), Route(..), HomePageView(..), ApiCrewMember, FilmDetail, FilmOption)
+import Ports exposing (sendSuggestions)
 import Json.Decode as Decode
 import Json.Decode.Pipeline as Pipeline
-import Http exposing (..)
+import Http
 import Task
-import Config exposing (..)
+import Config exposing (apiKey)
 import Navigation
 
 
@@ -35,11 +35,8 @@ getPage hash =
         "#home" ->
             HomeRoute
 
-        "#pageone" ->
-            PageOneRoute
-
-        "#pagetwo" ->
-            PageTwoRoute
+        "#suggestions" ->
+            SuggestionsRoute
 
         _ ->
             HomeRoute
