@@ -31,7 +31,8 @@ filmDescHtml filmDetail addButton =
             [ h2 [ class "tc mv2" ] [ text filmDetail.title ]
             , p [ class "sans-serif f6" ] [ text filmDetail.plot ]
             , p [ class "mb1" ] [ text <| "Director: " ++ filmDetail.director ]
-            , p [ class "mv0" ] [ text <| "Runtime: " ++ toString filmDetail.runtime ]
+            , p [ class "mv0 dib" ] [ text <| "Runtime: " ++ toString filmDetail.runtime ]
+            , p [ class "ml5 dib" ] [ text <| "Year: " ++ filmDetail.year ]
             ]
         , buttonHtml
         ]

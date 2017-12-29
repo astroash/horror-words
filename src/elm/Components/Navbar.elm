@@ -1,21 +1,21 @@
 module Components.Navbar exposing (navbar)
 
-import Html exposing (Html, a, li, text, ul)
-import Html.Attributes exposing (class, href)
+import Element exposing (..)
+import Element.Attributes exposing (..)
+import Html exposing (Html)
+import Stylesheet exposing (..)
 import Types exposing (Msg)
 
 
 navbar : Html Msg
 navbar =
-    ul [ class "dib ma0 w-100 pa2 drip" ]
-        navbarContent
+    Element.layout stylesheet <|
+        row NavBg [ padding 15, paddingBottom 100, spacing 50 ] <|
+            List.map navbarLink [ ( "home", "I wanna watch..." ), ( "suggestions", "Suggestions" ) ]
 
 
-navbarLink : ( String, String ) -> Html Msg
+navbarLink : ( String, String ) -> Element MyStyles variation msg
 navbarLink ( linkStr, name ) =
-    li [ class "list dib ma3 pb6--m" ] [ a [ class "link dim white b", href ("/#" ++ linkStr) ] [ text name ] ]
-
-
-navbarContent : List (Html Msg)
-navbarContent =
-    List.map navbarLink [ ( "home", "I wanna watch..." ), ( "suggestions", "Suggestions" ) ]
+    link ("/#" ++ linkStr) <|
+        el NavTitle [ paddingBottom 20 ] <|
+            text name
