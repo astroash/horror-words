@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./server/bin/www",
     "dev": "nodemon ./server/bin/www",
-    "postinstall": "cd client && npm install"
+    "postinstall": "cd client && npm i && elm-package i"
   },
   "engines": {
     "node": "6.11.1"
