@@ -9,8 +9,15 @@ import Style.Font as Font
 
 
 type MyStyles
-    = NavBg
+    = NoStyle
+    | NavBg
     | NavTitle
+    | FilmDeetBg
+    | FilmDeetImg
+    | FilmDeetTextContainer
+    | FilmDeetH2
+    | FilmDeetPlot
+    | FilmDeetFooter
 
 
 importFonts : List Font
@@ -32,6 +39,33 @@ stylesheet =
             [ Color.text Color.white
             , Font.size 20 -- all units given as px
             , Font.lineHeight 1.5
+            , Font.typeface
+                [ Font.font "Indie Flower"
+                , Font.font "Comic Sans"
+                , Font.font "Papyrus"
+                ]
+            ]
+        , Style.style FilmDeetH2
+            [ Color.text Color.white
+            , Font.size 20 -- all units given as px
+            , Font.typeface
+                [ Font.font "Indie Flower"
+                , Font.font "Comic Sans"
+                , Font.font "Papyrus"
+                ]
+            ]
+        , Style.style FilmDeetPlot
+            [ Color.text Color.white
+            , Font.size 20 -- all units given as px
+            , Font.typeface
+                [ Font.font "Indie Flower"
+                , Font.font "Comic Sans"
+                , Font.font "Papyrus"
+                ]
+            ]
+        , Style.style FilmDeetFooter
+            [ Color.text Color.white
+            , Font.size 20 -- all units given as px
             , Font.typeface
                 [ Font.font "Indie Flower"
                 , Font.font "Comic Sans"
