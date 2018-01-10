@@ -3,8 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "start": "node ./server/bin/www",
+    "dev": "nodemon ./server/bin/www",
+    "postinstall": "cd client && npm install"
+  },
+  "engines": {
+    "node": "6.11.1"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
